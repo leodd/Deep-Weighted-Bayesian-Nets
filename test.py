@@ -12,6 +12,9 @@ d_y = Domain(['Iris-setosa', 'Iris-versicolor', 'Iris-virginica'], continuous=Fa
 domains = [d_x, d_x, d_x, d_x, d_y]
 
 data[:, -1] = d_y.value_to_idx(data[:, -1])
+data = data.astype(float)
 
 dwbn = DeepWeightedBN(domains, nn_setting=[20, 20])
 dwbn.train(data)
+
+print(dwbn.infer(data[:, :-1]))
